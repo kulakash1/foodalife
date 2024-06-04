@@ -86,7 +86,8 @@ function App() {
       return;
     }
     try {
-      const response = await axios.post("http://localhost:3001/", foodData);
+      const response = await axios.post("https://serverfoodalife.onrender.com/", foodData);
+      // const response = await axios.post("http://localhost:3001/", foodData);
       console.log(response);
       message.success("Form submitted successfully");
     } catch (error) {
