@@ -11,6 +11,8 @@ import axios from "axios";
 
 
 function App() {
+  const [isLoading,setIsLoading] = useState(false);
+
   const [foodData, setFoodData] = useState({
     restaurantName: "",
     restaurantAddress: "",
@@ -82,11 +84,14 @@ function App() {
       return;
     }
     try {
+      setIsLoading(true);
       const response = await axios.post("https://serverfoodalife.onrender.com/", foodData);
+      setIsLoading(false);
       // const response = await axios.post("http://localhost:3001/", foodData);
       console.log(response);
       message.success("Form submitted successfully");
     } catch (error) {
+      setIsLoading(false);
       console.error(error);
       message.error("Form submission failed");
     }
@@ -257,6 +262,7 @@ function App() {
                 type="primary"
                 size="small"
                 className="mt-6"
+                loading={isLoading}
                 onClick={() => {
                   setFoodData((prevState) => {
                     const updatedItems = prevState.fooDItems.filter(
